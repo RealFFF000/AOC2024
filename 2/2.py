@@ -4,14 +4,9 @@ def isLegal(series):
     print(series)
     sign = 0
     if series[0]>series[1]:
-        #print("the series is decreasing")
         sign = -1
     elif series[0]<series[1]:
-        #print("the series is increasing")
-        sign = 1
-    else:
-        pass
-        #print("the series seems non-changing")
+        sign = 1       
 
     legal = True
     for number in range(len(series)-1):
@@ -36,7 +31,7 @@ with open('input.txt') as input:
         numbers = list(map(int, line.split(" ")))
         if isLegal(numbers):
             sum1+=1
-        #part 2
+    #part 2
         else:
             for excludedNumber in range(len(numbers)):
                 excludedNumbers = numbers.copy()
@@ -44,6 +39,5 @@ with open('input.txt') as input:
                 if isLegal(excludedNumbers):
                     sum2+=1
                     break
-
 sum2 += sum1
 print(sum1,sum2)
