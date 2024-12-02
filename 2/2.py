@@ -21,8 +21,7 @@ def isLegal(series):
                 pass
             else:
                 legal = False
-    if legal:
-        return(True)
+    return(legal)
 
 with open('input.txt') as input:
     #part 1 
