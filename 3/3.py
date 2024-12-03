@@ -1,9 +1,10 @@
 sum1 = 0
 sum2 = 0
 with open('input.txt') as input:
-    #part 1
+    #part 1 and 2 are together
+    enabled = True
     lines = input.readlines()
-    previousProduct = 0
+    previousProduct = 0 #for some reason he adds nested product twice so that's a fix
     for line in lines:
         for characters in line:
             if line.startswith("mul("):
@@ -21,6 +22,8 @@ with open('input.txt') as input:
                     product = factors[0]*factors[1]
                     if previousProduct != product:
                         sum1 += product
+                        if enabled:
+                            sum2+=product
                         previousProduct = product
                     print(factors[0],factors[1],product)
                 except:
@@ -28,6 +31,12 @@ with open('input.txt') as input:
                     #print(factors)
                 
                 line = line[(len(stringOfFactors)):]
+            elif line.startswith("do()"):
+                enabled = True
+                line = line[4:]
+            elif line.startswith("don't()"):
+                enabled = False
+                line = line[7:]
             else:
                 line = line[1:]
 
