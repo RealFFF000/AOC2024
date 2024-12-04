@@ -31,5 +31,4 @@ with open('input.txt') as input:
                                 legal = True
                 if legal:
                     sum2 += 1
-print("")
 print(sum1,sum2)
