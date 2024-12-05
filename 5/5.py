@@ -23,12 +23,20 @@ with open('input.txt') as input:
             for checkEvery in range((number+1),len(line)):
                 if (str(line[checkEvery])+"|"+str(line[number])) in rules:
                     legal = False
+                else:
+                    line[checkEvery],line[number] = line[number],line[checkEvery] #part 2
+        middleIndex = int(((len(line)+1)/2)-1)
         if legal:
-            middleIndex = int(((len(line)+1)/2)-1)
             print(line[middleIndex])
             try:
                 sum1 += int(line[middleIndex])
             except:
                 pass #probably some misused "\n" or something
 
+        #part 2
+        else:
+            try:
+                sum2 += int(line[middleIndex])
+            except:
+                pass #probably some misused "\n" or something
 print(sum1,sum2)
