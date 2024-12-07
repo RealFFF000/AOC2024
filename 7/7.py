@@ -19,6 +19,7 @@ with open('input.txt') as input:
                 if bit>len(str(binaryNumber)):
                     temporarySum += (products[len(products)-bit])
                     #print("+",products[len(products)-bit],end=" ")
+                    
                 else:
                     if (str(binaryNumber)[-bit] == "0"):
                         temporarySum += (products[len(products)-bit])
