@@ -39,11 +39,6 @@ with open('input.txt') as input:
                     elif (str(trinaryNumber)[-bit] == "2"):
                         temporarySum = int(str(temporarySum) + str((products[len(products)-bit])))
                         #print("|",products[len(products)-bit],end=" ")
-            
-            #finalString = str(temporarySum)
-            #print(stringSnapshot)
-            #for string in reversed(stringSnapshot):
-            #    finalString = str(string)+str(finalString)
             #print(temporarySum,localSum)
             #print("\n")
             if localSum == temporarySum:
