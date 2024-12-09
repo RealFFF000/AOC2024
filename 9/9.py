@@ -1,5 +1,4 @@
 sum1 = 0
-sum2 = 0
 
 with open('input.txt') as input:
     # part 1
@@ -45,4 +44,4 @@ with open('input.txt') as input:
 
 
 print("")
-print(sum1,sum2)
+print(sum1)
