@@ -1,8 +1,14 @@
 sum1 = 0
 directions = [[-1,0],[0,1],[1,0],[0,-1]]
+cornerSets = [
+    [[-1,0],[0,1]],
+    [[0,1],[1,0]],
+    [[1,0],[0,-1]],
+    [[0,-1],[-1,0]]
+]
 toDraw = 1
 blockArea = [0]
-blockPeremiter = [0]
+blockCorners = [0]
 map = []
 def printMap():
     for line in map:
@@ -19,11 +25,32 @@ def explore(y,x,characterToDrawWith):
             if lines[y+direction[0]][x+direction[1]] == lines[y][x] and map[y+direction[0]][x+direction[1]] == 0:
                 explore(y+direction[0],x+direction[1],characterToDrawWith)
             if not lines[y+direction[0]][x+direction[1]] == lines[y][x]:
-                blockPeremiter[0]+=1
+                pass
         else:
-            blockPeremiter[0]+=1
+            pass
             #print("apparently",y+direction[0],x+direction[1],"is considrered out of bounds")
+    #3 necessary conditions 
+    #1: either this or this
+    #** *#
+    #*# ##
+    left = 0
+    right = 0
+    opposite = 0
+    for direction in range(len(directions)):
+        if y+directions[direction][0]>=0 and y+directions[direction][0]<len(lines):
+            left = line[y+directions[direction][0]][x] 
+        else:
+            left = 0
+        if x+directions[direction+1][1]>=0 and x+directions[direction+1][1]<len(lines[line]):
+            right = line[y][x+directions[direction+1][1]]
+        else:
+            right = 0
+        if y+directions[direction][0]>=0 and y+directions[direction][0]<len(lines) and x+directions[direction+1][1]>=0 and x+directions[direction+1][1]<len(lines[line]):
+            opposite = line[y+directions[direction][0]][x+directions[direction+1][1]]
+        else:
+            opposite = 0
 
+    
 with open('input.txt') as input:
     lines = input.readlines()
     for line in range(len(lines)):
@@ -38,11 +65,12 @@ with open('input.txt') as input:
                 #printMap()
                 print("")
                 blockArea = [0]
-                blockPeremiter = [0]
+                blockCorners = [0]
                 explore(line,character,toDraw)
                 print(lines[line][character])
-                print(blockArea[0],blockPeremiter[0])
-                sum1+=(blockArea[0]*blockPeremiter[0])
+                print(blockArea[0],blockCorners[0])
+                print(blockArea[0]*blockCorners[0])
+                sum1+=(blockArea[0]*blockCorners[0])
                 toDraw += 1
                 if toDraw == 10: toDraw = 1
 
