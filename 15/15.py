@@ -28,7 +28,6 @@ with open('input.txt') as input:
         print(map[line])
     print(instructions)
 
-    
     for instruction in instructions:
         robotX = 0
         robotY = 0
