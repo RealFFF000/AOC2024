@@ -1,10 +1,12 @@
 import sys
-sys.setrecursionlimit(10000000)
+sys.setrecursionlimit(1000000000)
 sum1 = 0
-sum2 = 0
+sum2 = []
 directions = [[-1,0],[0,1],[1,0],[0,-1]]
 stack = []
 scores = []
+paths = []
+toExamine = []
 def printMap(lines,map):
     for Y in range(len(lines)):
         for X in range(len(lines[Y])):
@@ -20,7 +22,7 @@ def go(Y,X):
             stack[-1] = [Y,X]
             if [Y+direction[0],X+direction[1]] not in stack:
                 go(Y+direction[0],X+direction[1])
-        if lines[Y+direction[0]][X+direction[1]] == "E":
+        elif lines[Y+direction[0]][X+direction[1]] == "E":
             stack[-1] = [Y,X]
             lastDirection = [stack[1][0]-stack[0][0],stack[1][1]-stack[0][1]]
             tempScore = 1000
@@ -29,9 +31,10 @@ def go(Y,X):
                 if currentDirection != lastDirection:
                     tempScore+=1000
                     lastDirection = currentDirection
-            print(len(stack)+tempScore)
             printMap(lines,stack)
+            print(len(stack)+tempScore)
             scores.append(len(stack)+tempScore)
+            paths.append([stack])
     del stack[-1]
 
 with open('input.txt') as input:
@@ -43,10 +46,18 @@ with open('input.txt') as input:
             if lines[line][character] == "S":
                 go(line,character)
     lowestScore = 0
-    for score in scores:
+    for score in range(len(scores)):
         if lowestScore == 0:
-            lowestScore = score
+            lowestScore = scores[score]
+            toExamine = [score]
         else:
-            if lowestScore>score:
-                lowestScore = score
-    print("\n",lowestScore)
+            if lowestScore>scores[score]:
+                lowestScore = scores[score]
+                toExamine = [score]
+            elif lowestScore == scores[score]:
+                 toExamine.append(score)
+    for score in toExamine:
+        for spot in paths[score]:
+            if spot not in sum2:
+                sum2.append(spot)
+    print("\n",lowestScore,sum2)
