@@ -1,22 +1,22 @@
+from functools import cache
 sum1 = 0
-shouldBreak = []
+
+@cache
+def islegal(string, bit):
+    localsum = 0
+    if bit == len(string):
+        return 1
+    for string in strings:
+        lenght = len(string)
+        if string[bit : bit + lenght] == string:
+            localsum += islegal(string, bit + lenght)
+    return localsum
+
 with open('input.txt') as input:
     lines = input.readlines()
     bit = []
     bits = []
     strings = []
-
-    def islegal(tempString):
-        for bit in range(len(bits)):
-            if tempString.startswith(bits[bit]):
-                #print(tempString,bits[bit],"found")
-                if tempString == bits[bit]:
-                    legals.append("legal")
-                    print("found")        
-                islegal(tempString[len(bits[bit]):])
-            else: 
-                #print(tempString,bits[bit],"not found")
-                pass
 
     for line in range(len(lines)):
         if lines[line] == "\n":
@@ -28,13 +28,5 @@ with open('input.txt') as input:
         if "\n" in strings[string]:
             strings[string] = strings[string][:-1]
     print(bits,strings)
-    for string in range(len(strings)):
-        shouldBreak = []
-        legals = []
-        islegal(strings[string])
-        for a in legals:
-            sum1+=1
-        else:
-            print("illegal")
-        print(string)
+    sum1 = sum(islegal(string,bits) for string in strings)
     print(sum1)

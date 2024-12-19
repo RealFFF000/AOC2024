@@ -1,4 +1,4 @@
-sum1 = 0
+sum1 = []
 shouldBreak = []
 with open('input.txt') as input:
     lines = input.readlines()
@@ -9,16 +9,13 @@ with open('input.txt') as input:
     def islegal(tempString):
         for bit in range(len(bits)):
             if tempString.startswith(bits[bit]):
-                print(tempString,bits[bit],"found")
                 if tempString == bits[bit]:
-                    legals.append("legal")
+                    sum1.append("legal")
                     shouldBreak.append("yes")
                     break
                 islegal(tempString[len(bits[bit]):])
                 if len(shouldBreak) == 1:
                     break
-            else: 
-                print(tempString,bits[bit],"not found")
 
     for line in range(len(lines)):
         if lines[line] == "\n":
@@ -34,10 +31,4 @@ with open('input.txt') as input:
         shouldBreak = []
         legals = []
         islegal(strings[string])
-        if "legal" in legals:
-            print("legal")
-            sum1+=1
-        else:
-            print("illegal")
-        print("******")
-    print(sum1)
+    print(len(sum1))
